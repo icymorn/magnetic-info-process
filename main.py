@@ -12,6 +12,9 @@ def testGraphing():
     l = dl.read(testdata[0])
     l2 = dl.read(testdata[1])
     l3 = dl.read(testdata[2])
+    l4 = dl.read(testdata[3])
+    l5 = dl.read(testdata[4])
+    l6 = dl.read(testdata[5])
     ml = MagneticLine()
     # l = np.array(l)
     # l1 = np.kron(l, [0.5, 0.5])
@@ -22,8 +25,11 @@ def testGraphing():
     # l2 = np.kron(l2, [1,2])
     ml.addLine(l, "a0")
     # ml.addLine(l1, "a1")
-    ml.addLine(l2, "a2")
-    ml.addLine(l3, "b1")
+    ml.addLine(l2, "a1")
+    ml.addLine(l3, "b0")
+    ml.addLine(l4, "b1")
+    ml.addLine(l5, "b2")
+    ml.addLine(l6, "b3")
     ml.show()
 
 def testResizing():
@@ -38,4 +44,5 @@ def testResizing():
     ml.show()
 
 if __name__ == '__main__':
-    testResizing()
+    # testResizing()
+    testGraphing()
