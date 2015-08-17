@@ -1,0 +1,8 @@
+datafile:
+    test: 
+        - data/a0.data
+        - data/a1.data
+        - data/b0.data
+        - data/b1.data
+        - data/b2.data
+        - data/b3.data
