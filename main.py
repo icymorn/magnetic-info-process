@@ -1,9 +1,11 @@
 from config.Config import config
 from data.DataLoader import DataLoader
-from graph.basic import MagneticLine
+from graph.Basic import MagneticLine
+from scipy import ndimage
+from algorithm.ArrayStretch import BoxStretch
+import numpy as np
 
-if __name__ == '__main__':
-    import numpy as np
+def testGraphing():
     # import scipy.misc.imresize
     testdata = config.data['datafile']['test']
     dl = DataLoader()
@@ -11,7 +13,7 @@ if __name__ == '__main__':
     l2 = dl.read(testdata[1])
     l3 = dl.read(testdata[2])
     ml = MagneticLine()
-    l = np.array(l)
+    # l = np.array(l)
     # l1 = np.kron(l, [0.5, 0.5])
     # l2 = np.kron(l, [1, 1])
     # l3 = np.kron(l, [1.5, 1.5])
@@ -23,3 +25,17 @@ if __name__ == '__main__':
     ml.addLine(l2, "a2")
     ml.addLine(l3, "b1")
     ml.show()
+
+def testResizing():
+    testdata = config.data['datafile']['test']
+    dl = DataLoader()
+    data = dl.read(testdata[0])
+    print len(data)
+    newdata = BoxStretch(data, 600)
+    ml = MagneticLine()
+    ml.addLine(data, "origin")
+    ml.addLine(newdata, "newline")
+    ml.show()
+
+if __name__ == '__main__':
+    testResizing()
