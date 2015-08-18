@@ -1,8 +1,9 @@
 from dtw import dtw
 from graph.Basic import MagneticLine
+import mlpy
 
 def dtwDistance(x, y):
-    dis, cost, path = dtw(x, y)
+    dis, cost, path = mlpy.dtw_std(x, y)
     return dis, path
 
 def dtwExtend(x, path):
@@ -22,6 +23,9 @@ def dtwExtend(x, path):
         last1 = arr1[i]
         last2 = arr2[i]
     return [x[i] for i in result]
+
+def dtwSubsequence(x, y):
+    return mlpy.dtw_subsequence(x, y)
 
 def test():
     # y = [i * 2 for i in x]
