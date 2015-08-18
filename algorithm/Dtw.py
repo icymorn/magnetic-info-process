@@ -6,10 +6,22 @@ def dtwDistance(x, y):
     return dis, path
 
 def dtwExtend(x, path):
-    return [x[i] for i in path[1]]
-
-def dtwShrink(x, path):
-    return [x[i] for i in set(path[0])]
+    arr1   = path[0]
+    arr2   = path[1]
+    last1  = -1
+    last2  = -1
+    result = []
+    for i in xrange(len(arr1)):
+        if arr1[i] > last1 and arr2[i] > last2:
+            result.append(arr2[i])
+        elif arr1[i] > last1:
+            for j in xrange(arr1[i] - last1):
+                result.append(arr2[i])
+        elif arr2[i] > last2:
+            pass
+        last1 = arr1[i]
+        last2 = arr2[i]
+    return [x[i] for i in result]
 
 def test():
     # y = [i * 2 for i in x]

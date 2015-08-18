@@ -1,4 +1,4 @@
-from algorithm.Dtw import dtwDistance, dtwExtend, dtwShrink
+from algorithm.Dtw import dtwDistance, dtwExtend
 from data.DataLoader import DataLoader
 from config.Config import config
 from graph.Basic import MagneticLine
@@ -6,12 +6,13 @@ from graph.Basic import MagneticLine
 if __name__ == '__main__':
     dl = DataLoader()
     data = config.data['datafile']['test']
-    line1 = dl.read(data[0])
-    line2 = dl.read(data[1])
+    # line1 = dl.read(data[2])
+    # line2 = dl.read(data[3])
+    line1 = [0,0,0,0,0,1,0,0,0]
+    line2 = [0,0,3,3,3,0,0]
 
     cost, path = dtwDistance(line1, line2)
     line3 = dtwExtend(line2, path)
-
     # line1 is longer than line2
     ml = MagneticLine()
     ml.addLine(line1)
@@ -22,7 +23,7 @@ if __name__ == '__main__':
     line1, line2 = line2, line1
     # line2 is longer than line1
     cost, path = dtwDistance(line1, line2)
-    line3 = dtwShrink(line2, path)
+    line3 = dtwExtend(line2, path)
     ml2 = MagneticLine()
     ml2.addLine(line1)
     ml2.addLine(line2)
