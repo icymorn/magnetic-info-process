@@ -23,9 +23,10 @@ def prepareData(filename, prefix = "a"):
                     continue
                     # meet first line here
             else:
-                if counter % 4 == 3:
-                    data.append(float(line))
-                counter += 1
+                if line != '\n':
+                    if counter % 4 == 3:
+                        data.append(float(line))
+                    counter += 1
 
 def save(name, data):
     pickle.dump(data, open(name + '.data', 'wb'))

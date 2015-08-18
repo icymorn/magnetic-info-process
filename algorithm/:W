@@ -9,7 +9,7 @@ def dtwExtend(x, path):
     return [x[i] for i in path[1]]
 
 def dtwShrink(x, path):
-    return [x[i] for i in set(path[0])]
+    return [x[i] for i in set(path[1])]
 
 def test():
     # y = [i * 2 for i in x]
