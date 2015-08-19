@@ -2,7 +2,6 @@ import mlpy
 
 def dtwDistance(x, y):
     dis, cost, path = mlpy.dtw_std(x, y, dist_only = False)
-    print dis, path
     return dis, path
 
 def dtwExtend(x, path):
@@ -20,7 +19,6 @@ def dtwExtend(x, path):
             pass
         last1 = arr1[i]
         last2 = arr2[i]
-    print result
     return [x[i] for i in result]
 
 def dtwCalculate(x, y):

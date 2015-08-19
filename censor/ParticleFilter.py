@@ -6,7 +6,7 @@ class ParticleFilter:
 
     def __init__(self):
         self.lastSignal = []
-        self.currSignal = []
+        self.currSignal = None
         self.config = config.data['filter']
         self.lower = self.config['lower']
         self.upper = self.config['upper']
@@ -31,6 +31,10 @@ class ParticleFilter:
         self.lastSignal = signalArr
 
     def filter(self, p):
+        if self.currSignal is None:
+            print "please capture some data firstly."
+            exit(1)
+
         lower = 0 if p - self.lower < 0 else p - self.lower
         upper = 1 if p - self.upper > 1 else p + self.upper
         lowerIndex = int(self.standardLength * lower)
@@ -40,16 +44,16 @@ class ParticleFilter:
             totalPos  = 0
             dataCount = len(self.data)
             for line in self.data:
-                dist, pos = dtwCalculate(line[lowerIndex: upperIndex], self.currSignal)
+                dist, pos = dtwCalculate(self.currSignal, line[lowerIndex: upperIndex])
                 totalDist += dist
                 totalPos  += pos
-            return totalDist / dataCount, totalPos / dataCount
+            return totalDist / dataCount, totalPos / dataCount + lowerIndex
         else:
             bestDist = 999999999
             bestPos  = 0
             for line in self.data:
-                dist, pos = dtwCalculate(line[lowerIndex: upperIndex], self.currSignal)
+                dist, pos = dtwCalculate(self.currSignal, line[lowerIndex: upperIndex])
                 if dist < bestDist:
                     bestPos = pos
                     bestDist = dist
-            return bestDist, bestPos
+            return bestDist, bestPos + lowerIndex
