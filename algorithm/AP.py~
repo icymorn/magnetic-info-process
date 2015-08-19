@@ -1,0 +1,88 @@
+
+# coding: utf-8
+
+# In[81]:
+
+from sklearn.cluster import AffinityPropagation
+from sklearn import metrics
+from sklearn.datasets.samples_generator import make_blobs
+
+
+# In[82]:
+
+import  numpy as np
+
+
+# In[83]:
+
+array = np.ndarray(shape=(20,5), dtype=float, order='F')
+
+
+# In[85]:
+
+import math
+import random
+
+
+# In[86]:
+
+for j in range(0, 5):
+    for i in range(0, 5):
+        array[j][i] = math.sin(i)*i+random.random()
+
+
+# In[88]:
+
+for j in range(5, 10):
+    for i in range(0, 5):
+        array[j][i] = math.cos(i)*i+random.random()
+
+
+# In[89]:
+
+for j in range(10, 15):
+    for i in range(0, 5):
+        array[j][i] = math.sin(i)*i+random.random()
+
+
+# In[90]:
+
+for j in range(15, 20):
+    for i in range(0, 5):
+        array[j][i] = i*math.cos(i)*i+random.random()
+
+
+# In[91]:
+
+af = AffinityPropagation(preference=-50).fit(array)
+
+
+# In[67]:
+
+##############################################################################
+# Plot result
+import matplotlib.pyplot as plt
+from itertools import cycle
+n_clusters_ = len(af.cluster_centers_indices_)
+plt.close('all')
+plt.figure(1)
+plt.clf()
+
+colors = cycle('bgrcmykbgrcmykbgrcmykbgrcmyk')
+for k, col in zip(range(n_clusters_), colors):
+    class_members = af.labels_ == k
+    cluster_center = array[af.cluster_centers_indices_[k]]
+    plt.plot(array[class_members, 0], array[class_members, 1], col + '.')
+    plt.plot(cluster_center[0], cluster_center[1], 'o', markerfacecolor=col,
+             markeredgecolor='k', markersize=14)
+    for x in array[class_members]:
+        plt.plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], col)
+
+plt.title('Estimated number of clusters: %d' % n_clusters_)
+plt.show()
+
+
+# In[ ]:
+
+
+
