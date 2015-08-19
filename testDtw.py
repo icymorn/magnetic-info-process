@@ -1,4 +1,4 @@
-from algorithm.Dtw import dtwSubsequence
+from algorithm.Dtw import dtwSubsequence, dtwExtend, dtwDistance
 from algorithm.ArrayStretch import BoxStretch
 from data.DataLoader import DataLoader
 from config.Config import config
@@ -12,7 +12,6 @@ if __name__ == '__main__':
     sub = line1[offset:offset + size]
     dist, cost, path = dtwSubsequence(sub, line1)
     print dist
-    print cost
     print path
     start = path[1][0]
     ml = MagneticLine()

@@ -1,9 +1,8 @@
-from dtw import dtw
-from graph.Basic import MagneticLine
 import mlpy
 
 def dtwDistance(x, y):
-    dis, cost, path = mlpy.dtw_std(x, y)
+    dis, cost, path = mlpy.dtw_std(x, y, dist_only = False)
+    print dis, path
     return dis, path
 
 def dtwExtend(x, path):
@@ -16,12 +15,12 @@ def dtwExtend(x, path):
         if arr1[i] > last1 and arr2[i] > last2:
             result.append(arr2[i])
         elif arr1[i] > last1:
-            for j in xrange(arr1[i] - last1):
-                result.append(arr2[i])
+            result.append(arr2[i])
         elif arr2[i] > last2:
             pass
         last1 = arr1[i]
         last2 = arr2[i]
+    print result
     return [x[i] for i in result]
 
 def dtwCalculate(x, y):
