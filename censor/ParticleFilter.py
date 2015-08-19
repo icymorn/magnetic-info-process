@@ -56,4 +56,4 @@ class ParticleFilter:
                 if dist < bestDist:
                     bestPos = pos
                     bestDist = dist
-            return bestDist, bestPos + lowerIndex
+            return bestDist, (bestPos + lowerIndex) / self.standardLength
