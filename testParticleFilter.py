@@ -1,4 +1,4 @@
-from censor.ParticleFilter import ParticleFilter
+from sensor.ParticleFilter import ParticleFilter
 from config.Config import config
 from data.DataLoader import DataLoader
 
