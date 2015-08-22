@@ -7,10 +7,11 @@ class ParticleFilter:
     def __init__(self):
         self.lastSignal = []
         self.currSignal = None
-        self.config = config.data['filter']
+        self.config = config.data['sensor']
         self.lower = self.config['lower']
         self.upper = self.config['upper']
         self.locationPrefer = self.config['locationPrefer'] # best=0 or avg=1
+        self.direction = 1
 
     def load(self, fileList):
         loader = DataLoader()
@@ -26,11 +27,12 @@ class ParticleFilter:
 
         self.data = data
 
-    def capture(self, signalArr):
+    def accept(self, signalArr, direction = 1):
         self.currSignal = self.lastSignal + signalArr
         self.lastSignal = signalArr
+        self.direction = direction
 
-    def filter(self, p):
+    def eval(self, p):
         if self.currSignal is None:
             print "please capture some data firstly."
             exit(1)
@@ -56,4 +58,4 @@ class ParticleFilter:
                 if dist < bestDist:
                     bestPos = pos
                     bestDist = dist
-            return bestDist, float(bestPos + lowerIndex) / self.standardLength
+            return bestDist, float(bestPos + lowerIndex + len(self.lastSignal)) / self.standardLength

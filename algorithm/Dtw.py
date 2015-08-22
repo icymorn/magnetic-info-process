@@ -23,7 +23,8 @@ def dtwExtend(x, path):
 
 def dtwCalculate(x, y):
     dist, cost, path = mlpy.dtw_subsequence(x, y)
-    return dist, path[1][0]
+    path = path[1]
+    return dist, (path[0] + path[len(path) - 1]) / 2.0
 
 def dtwSubsequence(x, y):
     return mlpy.dtw_subsequence(x, y)

@@ -1,12 +1,21 @@
 datafile:
     test: 
-        # - data/a0.data
         - data/a1.data
-        # - data/b0.data
         - data/b1.data
-        # - data/b2.data
         - data/b3.data
-filter:
+
+network:
+    server:
+        ip: 127.0.0.1
+        port: 9999
+
+sensor:
     locationPrefer: 0 # best = 0, avg = 1
-    lower: 0.2
-    upper: 0.2
+    lower: 0.1
+    upper: 0.1
+
+particle:
+    lambda: 1
+    gauss:
+        mu: 0,
+        sigma: 0.01
