@@ -10,7 +10,7 @@ loader = DataLoader()
 data   = loader.read(config.data['datafile']['test'][1])
 
 # init particle factory
-pFactory = ParticleFactory(100)
+pFactory = ParticleFactory(100, [config.data['datafile']['test'][1]])
 
 realPos  = 0
 size     = 5

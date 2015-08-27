@@ -1,4 +1,5 @@
 import sys
+import json
 import pickle
 
 def prepareData(filename, prefix = "a"):
@@ -29,8 +30,13 @@ def prepareData(filename, prefix = "a"):
                     counter += 1
 
 def save(name, data):
-    pickle.dump(data, open(name + '.data', 'wb'))
-    print(name + '.data' + " : saved")
+    with open(name + '.data', 'wb') as output:
+        pickle.dump(data, output)
+        print(name + '.data' + " : saved")
+
+    with open(name + '.json', 'wb') as output:
+        json.dump(data, output)
+        print(name + '.json' + " : saved")
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

@@ -1,0 +1,23 @@
+from particle.ParticleFactory import ParticleFactory
+from config.Config import config
+from data.DataLoader import DataLoader
+import bisect
+
+generators = {}
+
+def particleFilter():
+    pFactory = ParticleFactory(400, [config.data['datafile']['test'][1]])
+
+    while True:
+        # get a slice of data
+        recieve = yield
+        pFactory.accept(recieve)
+        step = len(recieve)
+        pFactory.move(step)
+        yield pFactory.getPredict()
+        
+        pFactory.resample()
+
+x = particleFilter()
+x.next()
+print x.send([1,2,3,4,5])
