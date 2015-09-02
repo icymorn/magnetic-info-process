@@ -13,7 +13,10 @@ def testGraphing():
     l2 = dl.read(testdata[1])
     l3 = dl.read(testdata[2])
     ml = MagneticLine()
-    # l = np.array(l)
+    dist, path = dtwDistance(l, l2)
+    lineData = dtwExtend(l2, path)
+
+   # l = np.array(l)
     # l1 = np.kron(l, [0.5, 0.5])
     # l2 = np.kron(l, [1, 1])
     # l3 = np.kron(l, [1.5, 1.5])
@@ -23,7 +26,7 @@ def testGraphing():
     ml.addLine(l, "a0")
     # ml.addLine(l1, "a1")
     ml.addLine(l2, "a1")
-    ml.addLine(l3, "b0")
+    ml.addLine(lineData, "a1'")
     ml.show()
 
 def testResizing():
