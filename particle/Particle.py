@@ -1,32 +1,42 @@
-import math
-from config.Config import config
+# ------------------------------------------------------------------------
+# coding=utf-8
+# ------------------------------------------------------------------------
+#
+#  Created by Jason Wu on 2015-08-29
+#
+# ------------------------------------------------------------------------
 
+import random
 
-class Particle:
+class Particle(object):
+    def __init__(self, pos, w=1):
+        self._pos = pos
+        self._w = w
 
-    l = config.data['particle']['lambda']
+    def __repr__(self):
+        return "(x=%f, w=%f)" % (self._pos, self._w)
 
-    def __init__(self, pos):
-        self.pos = pos
-        self.weight = 1
+    @property
+    def pos(self):
+        return self._pos
 
-    def updateWeight(self, fit):
-        self.weight *= self.weight * math.exp(-Particle.l * fit)
+    @pos.setter
+    def pos(self, value):
+        if not isinstance(value, float):
+            raise ValueError('pos must be an float!')
+        if value < 0.0:
+            self._w = 0.0
+            #raise ValueError('pos must between 0.0 ~ 1.0 !')
+        self._pos = value
 
-    def getPos(self):
-        return self.pos
+    @property
+    def w(self):
+        return self._w
 
-    def setPos(self, pos):
-        self.pos = pos
-
-    def move(self, step):
-        newPos = self.pos + step
-        if newPos > 1 or newPos < 0:
-            self.weight = 0
-        self.pos = newPos
-
-    def getWeight(self):
-        return self.weight
-
-    def setWeight(self, weight):
-        self.weight = weight
+    @w.setter
+    def w(self, value):
+        if not isinstance(value, float):
+            raise ValueError('weight must be an float!')
+        if value < 0.0 or value > 1.0:
+            raise ValueError('weight must between 0.0 ~ 1.0 !')
+        self._w = value

@@ -1,8 +1,14 @@
 datafile:
     test: 
-        - data/a1.data
-        - data/b1.data
-        - data/b3.data
+        - data/M0001.data
+        - data/FM0001.data
+        - data/F18.data
+    infilter:
+        - data/L01.data
+    align:
+        - data/AR03.data
+    filter:
+        - data/FR03.data
 
 network:
     server:
@@ -13,9 +19,12 @@ sensor:
     locationPrefer: 0 # best = 0, avg = 1
     lower: 0.1
     upper: 0.1
+    bufferSize: 25
 
 particle:
-    lambda: 1
-    gauss:
-        mu: 0,
-        sigma: 0.01
+    lambda: 0.1
+    speed: 0.15
+    speed_standard_deviation: 0.01
+    resample_uniform_percent: 0.1
+    resample_around_max_percent: 0.1
+    resample_around_max_standard_deviation: 0.3
